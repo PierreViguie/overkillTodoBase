@@ -1,6 +1,6 @@
 import {Todo} from '../models/todo';
 import {createReducer, on} from '@ngrx/store';
-import {loadTodosSuccess} from './actions';
+import {changeTodoStatus, loadTodosSuccess} from './actions';
 
 export const featureKey = 'todosStore';
 
@@ -21,4 +21,15 @@ export const todosReducer = createReducer(
       todos
     })
   ),
+  //US2 : check a todo.
+  on(changeTodoStatus, (state, { todoId }) => {
+    const mutableTodos: Todo[] = [...state.todos];
+    const updatedTodos = mutableTodos.map(todo =>
+      todo.id === todoId ?
+        {...todo, isClosed: !todo.isClosed}
+        :todo
+    )
+    return {...state, todos: updatedTodos};
+  }
+  )
 );

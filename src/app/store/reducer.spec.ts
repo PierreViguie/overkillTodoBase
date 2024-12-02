@@ -1,6 +1,6 @@
 import * as fromReducer from './reducer';
 import { State } from './reducer';
-import { loadTodosSuccess } from './actions';
+import { changeTodoStatus, loadTodosSuccess } from './actions';
 
 describe('Reducer', () => {
   describe('unknown action', () => {
@@ -18,7 +18,7 @@ describe('Reducer', () => {
   describe('loadTodosSuccess action', () => {
     it('should retrieve all todos and update the state', () => {
       const { initialState } = fromReducer;
-      const newState: State = { todos: [{ title: 'aTitle', isClosed: false }] };
+      const newState: State = { todos: [{id:1, title: 'aTitle', isClosed: false }] };
       const action = loadTodosSuccess({
         todos: [...newState.todos],
       });
@@ -27,6 +27,22 @@ describe('Reducer', () => {
 
       expect(state).toEqual(newState);
       expect(state).not.toBe(newState);
+    });
+  });
+
+  describe('changeTodoStatus action', () => {
+    it('should handle change of todo component checklist when check pass to true', () => {
+      const todoId = 1;
+      const action = changeTodoStatus({ todoId });
+      const initialState = {
+        todos: [{ id: 1, title: 'aTitle', isClosed: false }]};
+      const newState: State = { todos: [{id:1, title: 'aTitle', isClosed: true }] };
+
+      const state = fromReducer.todosReducer(initialState, action);
+
+      expect(state).toEqual(newState);
+      expect(state).not.toBe(newState);
+
     });
   });
 });

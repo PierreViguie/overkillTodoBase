@@ -44,8 +44,9 @@ describe('TodoListComponent', () => {
     component = fixture.componentInstance;
 
     mockTodosSelector = store.overrideSelector(selectTodos, [
-      { title: 'todo 1', isClosed: false },
-      { title: 'todo 2', isClosed: true },
+      {id: 1, title: 'todo 1', isClosed: false },
+      {id: 2, title: 'todo 2', isClosed: true },
+      {id: 3, title: 'todo 3', isClosed: false },
     ]);
 
     fixture.detectChanges();
@@ -61,14 +62,20 @@ describe('TodoListComponent', () => {
     );
   });
 
-  it('should display todos', () => {
+  it('should display todos sorted', () => {
     const todoElements = fixture.debugElement.queryAll(By.css('mat-list mat-list-item'));
-    expect(todoElements.length).toEqual(2);
+    expect(todoElements.length).toEqual(3);
     expect(todoElements[0].query(By.css('h4')).nativeElement.innerText).toContain('todo 1');
-    expect(todoElements[1].query(By.css('h4')).nativeElement.innerText).toContain('todo 2');
+    expect(todoElements[1].query(By.css('h4')).nativeElement.innerText).toContain('todo 3');
+    //Expect that todo 2 is the last element, isClosed is true.
+    expect(todoElements[2].query(By.css('h4')).nativeElement.innerText).toContain('todo 2');
+    //Only one task is closed, so only one is crossed out.
+    const crossedElement = fixture.debugElement.queryAll(By.css('.isDone'));
+    expect(crossedElement.length).toEqual(1);
     const todoCheckboxes: MockedComponent<MatCheckbox>[] =
       todoElements.map(item => item.query(By.css('mat-checkbox'))).map(item => item.componentInstance);
     expect(todoCheckboxes[0].checked).toBeFalse();
-    expect(todoCheckboxes[1].checked).toBeTrue();
+    expect(todoCheckboxes[1].checked).toBeFalse();
+    expect(todoCheckboxes[2].checked).toBeTrue();
   });
 });

@@ -9,3 +9,9 @@ export const loadTodosSuccess = createAction(
 );
 
 export const loadTodosFailed = createAction('[Todos] Load todos failed');
+
+//US2
+export const changeTodoStatus = createAction(
+  '[Todos] Updating Todo\'s Status',
+  props<{ todoId: number }>()
+);
