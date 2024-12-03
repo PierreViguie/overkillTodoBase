@@ -5,10 +5,12 @@ import {changeTodoStatus, loadTodosSuccess} from './actions';
 export const featureKey = 'todosStore';
 
 export interface State {
+  initialized: boolean;
   todos: ReadonlyArray<Todo>;
 }
 
 export const initialState: State = {
+  initialized: false,
   todos: [],
 };
 
@@ -18,10 +20,11 @@ export const todosReducer = createReducer(
     loadTodosSuccess,
     (state, { todos }) => ({
       ...state,
+      initialized: true,
       todos
     })
   ),
-  //US2 : check a todo.
+
   on(changeTodoStatus, (state, { todoId }) => {
     const mutableTodos: Todo[] = [...state.todos];
     const updatedTodos = mutableTodos.map(todo =>

@@ -7,3 +7,8 @@ export const selectTodos = createSelector(
   getState,
   (state: State) => state.todos,
 );
+
+export const selectInitialized = createSelector(
+  getState,
+  (state: State) => state.initialized
+);

@@ -11,6 +11,7 @@
             ></mat-checkbox>
             <span [ngClass]="{ 'isDone': todo.isClosed}">{{ todo.title }}</span>
           </h4>
+          <a mat-button routerLink="/details/{{ todo.id }}">Détails</a >
         </mat-list-item>
       </mat-list>
     </mat-card-content>

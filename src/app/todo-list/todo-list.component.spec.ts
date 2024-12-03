@@ -11,6 +11,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import {MockComponents, MockDirectives, MockedComponent} from 'ng-mocks';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -33,7 +34,7 @@ describe('TodoListComponent', () => {
           MatCardTitle
         )
       ],
-      imports: [MatRippleModule, FormsModule],
+      imports: [MatRippleModule, FormsModule, RouterTestingModule],
       providers: [provideMockStore()],
     }).compileComponents();
   });

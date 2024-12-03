@@ -18,7 +18,7 @@ describe('Reducer', () => {
   describe('loadTodosSuccess action', () => {
     it('should retrieve all todos and update the state', () => {
       const { initialState } = fromReducer;
-      const newState: State = { todos: [{id:1, title: 'aTitle', isClosed: false }] };
+      const newState: State = { todos: [{id:1, title: 'aTitle', isClosed: false }], initialized: true };
       const action = loadTodosSuccess({
         todos: [...newState.todos],
       });
@@ -35,8 +35,9 @@ describe('Reducer', () => {
       const todoId = 1;
       const action = changeTodoStatus({ todoId });
       const initialState = {
-        todos: [{ id: 1, title: 'aTitle', isClosed: false }]};
-      const newState: State = { todos: [{id:1, title: 'aTitle', isClosed: true }] };
+        todos: [{ id: 1, title: 'aTitle', isClosed: false }],
+        initialized: true};
+      const newState: State = { todos: [{id:1, title: 'aTitle', isClosed: true }], initialized: true };
 
       const state = fromReducer.todosReducer(initialState, action);
 

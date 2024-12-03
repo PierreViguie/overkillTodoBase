@@ -6,7 +6,8 @@ describe('Selectors', () => {
    todos: [
      {id:1, title: 'todo1Title', isClosed: true},
      {id:2, title: 'todo2Title', isClosed: false},
-   ]
+   ],
+   initialized: true
   };
 
   it('should select todos list', () => {
