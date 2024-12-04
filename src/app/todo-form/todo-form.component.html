@@ -1,0 +1,22 @@
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Titre</mat-label>
+    <input matInput formControlName="title" placeholder="Entrez le titre" required />
+    <mat-error *ngIf="todoForm.get('title')?.hasError('required')">
+      Le titre est requis.
+    </mat-error>
+    <mat-error *ngIf="todoForm.get('title')?.hasError('minlength')">
+      Le titre doit avoir au moins 3 caractères.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description" placeholder="Entrez une description"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button id="button-submit" color="primary" type="submit" [disabled]="todoForm.invalid">
+    create
+  </button>
+  <button mat-button id="button-return" [routerLink]="['/']">return to todo list</button>
+</form>

@@ -9,7 +9,7 @@
             (change)="onChangeTodoStatus(todo.id)"
               [checked]="todo.isClosed"
             ></mat-checkbox>
-            <span [ngClass]="{ 'isDone': todo.isClosed}">{{ todo.title }}</span>
+            <span [ngClass]="{ 'isDone': todo.isClosed}">n°{{ todo.id }} - {{ todo.title }}</span>
           </h4>
           <a mat-button routerLink="/details/{{ todo.id }}">Détails</a >
         </mat-list-item>
@@ -17,3 +17,4 @@
     </mat-card-content>
   </mat-card>
 </div>
+<button mat-button [routerLink]="['/create']">Add new task to do</button>

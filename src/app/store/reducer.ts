@@ -1,6 +1,6 @@
 import {Todo} from '../models/todo';
 import {createReducer, on} from '@ngrx/store';
-import {changeTodoStatus, loadTodosSuccess} from './actions';
+import {addNewTodo, changeTodoStatus, loadTodosSuccess} from './actions';
 
 export const featureKey = 'todosStore';
 
@@ -33,6 +33,13 @@ export const todosReducer = createReducer(
         :todo
     )
     return {...state, todos: updatedTodos};
-  }
+    }
+  ),
+
+  on(addNewTodo, (state, {todo}) => ({
+    ...state,
+    todos: [...state.todos, todo],
+    initialized: true
+  })
   )
 );

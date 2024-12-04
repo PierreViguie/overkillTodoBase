@@ -15,3 +15,9 @@ export const changeTodoStatus = createAction(
   '[Todos] Updating Todo\'s Status',
   props<{ todoId: number }>()
 );
+
+//US4
+export const addNewTodo = createAction(
+  '[Todos] create a new todo task',
+  props<{ todo: Todo}>()
+)
